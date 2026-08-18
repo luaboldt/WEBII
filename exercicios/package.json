@@ -1,0 +1,20 @@
+{
+  "name": "exercicios-webii",
+  "version": "1.0.0",
+  "description": "Exercícios de Desenvolvimento Web II - IFFar",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "iffar",
+    "web2",
+    "exercicios"
+  ],
+  "author": "Luã Boldt",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Luã Boldt">
+  <title>Exercício 02 - CPF ou CNPJ</title>
+
+  <!-- Redirecionamento automático caso falte a barra no final da URL -->
+  <script>
+    if (window.location.pathname && !window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+      window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Sistema Global de Temas (Claro / Escuro) -->
+  <link rel="stylesheet" href="../global.css">
+  <script src="../tema.js"></script>
+
+  <link rel="stylesheet" href="./style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Barra Superior */
+    .top-nav {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-voltar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s ease;
+    }
+
+    .btn-voltar:hover {
+      transform: translateX(-2px);
+      border-color: var(--primary);
+    }
+
+    .badge-tag {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      border: 1px solid var(--badge-border);
+      transition: all 0.3s ease;
+    }
+
+    /* Card Central */
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+
+    .descricao {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .label-titulo {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    /* Opções de Radio */
+    .radio-container {
+      display: flex;
+      gap: 16px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      padding: 8px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .radio-label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      background: transparent;
+      color: var(--text-main);
+      user-select: none;
+    }
+
+    .radio-label:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .radio-label input[type="radio"] {
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .campo-documento {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .campo-documento label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .campo-documento input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--input-border);
+      background-color: var(--input-bg);
+      color: var(--text-main);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .campo-documento input[type="text"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    }
+
+    /* ========================================================
+       ESTADOS DE VALIDAÇÃO DE ALTO CONTRASTE E ALTA VISIBILIDADE
+       ======================================================== */
+
+    /* 1. VÁLIDO (VERDE VIBRANTE) */
+    .campo-documento input.valido {
+      border-color: #10b981 !important;
+      background-color: #ecfdf5 !important;
+      color: #065f46 !important;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25) !important;
+    }
+
+    body.tema-escuro .campo-documento input.valido {
+      border-color: #34d399 !important;
+      background-color: rgba(16, 185, 129, 0.22) !important;
+      color: #ecfdf5 !important;
+      box-shadow: 0 0 16px rgba(52, 211, 153, 0.35) !important;
+    }
+
+    /* 2. INVÁLIDO (VERMELHO VIBRANTE) */
+    .campo-documento input.invalido {
+      border-color: #ef4444 !important;
+      background-color: #fef2f2 !important;
+      color: #991b1b !important;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25) !important;
+    }
+
+    body.tema-escuro .campo-documento input.invalido {
+      border-color: #f87171 !important;
+      background-color: rgba(239, 68, 68, 0.22) !important;
+      color: #fef2f2 !important;
+      box-shadow: 0 0 16px rgba(248, 113, 113, 0.35) !important;
+    }
+
+    /* Mensagem de Erro (visível apenas quando inválido) */
+    .feedback-msg {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ef4444;
+      display: none;
+    }
+
+    body.tema-escuro .feedback-msg {
+      color: #f87171;
+    }
+
+    .feedback-msg.invalido {
+      display: block;
+    }
+
+    .escondido {
+      display: none !important;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior -->
+  <header class="top-nav">
+    <a href="../index.html" class="btn-voltar">
+      ← Voltar aos Exercícios
+    </a>
+    <span class="badge-tag">Exercício 02 • Formulários & DOM</span>
+  </header>
+
+  <!-- Container do Formulário -->
+  <main class="container">
+    <div class="card">
+      <h1>Identificação</h1>
+      <p class="descricao">Selecione o tipo de documento e digite os números:</p>
+
+      <form id="formDocumento" onsubmit="event.preventDefault();">
+        
+        <!-- Seleção do tipo de documento (Radio Buttons) -->
+        <div class="form-group">
+          <span class="label-titulo">Tipo de Pessoa / Documento:</span>
+          <div class="radio-container">
+            <label class="radio-label">
+              <input type="radio" name="tipoDocumento" id="radioCpf" value="cpf" checked onchange="alternarDocumento()">
+              Pessoa Física (CPF)
+            </label>
+
+            <label class="radio-label">
+              <input type="radio" name="tipoDocumento" id="radioCnpj" value="cnpj" onchange="alternarDocumento()">
+              Pessoa Jurídica (CNPJ)
+            </label>
+          </div>
+        </div>
+
+        <!-- Campo CPF (visível por padrão) -->
+        <div class="form-group campo-documento" id="campoCpf">
+          <label for="inputCpf">Informe seu CPF:</label>
+          <div class="input-wrapper">
+            <input type="text" id="inputCpf" placeholder="000.000.000-00" maxlength="14" oninput="formatarCPF(this)">
+          </div>
+          <div class="feedback-msg" id="feedbackCpf"></div>
+        </div>
+
+        <!-- Campo CNPJ (escondido por padrão) -->
+        <div class="form-group campo-documento escondido" id="campoCnpj">
+          <label for="inputCnpj">Informe seu CNPJ:</label>
+          <div class="input-wrapper">
+            <input type="text" id="inputCnpj" placeholder="00.000.000/0000-00" maxlength="18" oninput="formatarCNPJ(this)">
+          </div>
+          <div class="feedback-msg" id="feedbackCnpj"></div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <script src="./script.js"></script>
+
+  <!-- Script Embutido -->
+  <script>
+    function alternarDocumento() {
+      const radioCpf = document.getElementById('radioCpf');
+      const campoCpf = document.getElementById('campoCpf');
+      const campoCnpj = document.getElementById('campoCnpj');
+
+      limparFeedback();
+
+      if (radioCpf.checked) {
+        campoCpf.classList.remove('escondido');
+        campoCnpj.classList.add('escondido');
+      } else {
+        campoCpf.classList.add('escondido');
+        campoCnpj.classList.remove('escondido');
+      }
+    }
+
+    function formatarCPF(input) {
+      let valor = input.value.replace(/\D/g, '');
+      if (valor.length > 11) valor = valor.slice(0, 11);
+
+      valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+      valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+      valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+      input.value = valor;
+
+      const digitos = input.value.replace(/\D/g, '');
+      if (digitos.length === 11) {
+        validarCPF(digitos);
+      } else {
+        removerValidacao(input, document.getElementById('feedbackCpf'));
+      }
+    }
+
+    function formatarCNPJ(input) {
+      let valor = input.value.replace(/\D/g, '');
+      if (valor.length > 14) valor = valor.slice(0, 14);
+
+      valor = valor.replace(/^(\d{2})(\d)/, '$1.$2');
+      valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+      valor = valor.replace(/\.(\d{3})(\d)/, '.$1/$2');
+      valor = valor.replace(/(\d{4})(\d)/, '$1-$2');
+
+      input.value = valor;
+
+      const digitos = input.value.replace(/\D/g, '');
+      if (digitos.length === 14) {
+        validarCNPJ(digitos);
+      } else {
+        removerValidacao(input, document.getElementById('feedbackCnpj'));
+      }
+    }
+
+    function validarCPF(cpf) {
+      const input = document.getElementById('inputCpf');
+      const feedback = document.getElementById('feedbackCpf');
+
+      if (/^(\d)\1+$/.test(cpf) || cpf.length !== 11) {
+        aplicarStatus(input, feedback, false, 'CPF inválido');
+        return;
+      }
+
+      let soma = 0;
+      for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+      let resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+      if (resto !== parseInt(cpf.charAt(9))) {
+        aplicarStatus(input, feedback, false, 'CPF inválido');
+        return;
+      }
+
+      soma = 0;
+      for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+      resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+      if (resto !== parseInt(cpf.charAt(10))) {
+        aplicarStatus(input, feedback, false, 'CPF inválido');
+        return;
+      }
+
+      aplicarStatus(input, feedback, true);
+    }
+
+    function validarCNPJ(cnpj) {
+      const input = document.getElementById('inputCnpj');
+      const feedback = document.getElementById('feedbackCnpj');
+
+      if (/^(\d)\1+$/.test(cnpj) || cnpj.length !== 14) {
+        aplicarStatus(input, feedback, false, 'CNPJ inválido');
+        return;
+      }
+
+      let tamanho = cnpj.length - 2;
+      let numeros = cnpj.substring(0, tamanho);
+      let digitos = cnpj.substring(tamanho);
+      let soma = 0;
+      let pos = tamanho - 7;
+
+      for (let i = tamanho; i >= 1; i--) {
+        soma += parseInt(numeros.charAt(tamanho - i)) * pos--;
+        if (pos < 2) pos = 9;
+      }
+
+      let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+      if (resultado !== parseInt(digitos.charAt(0))) {
+        aplicarStatus(input, feedback, false, 'CNPJ inválido');
+        return;
+      }
+
+      tamanho = tamanho + 1;
+      numeros = cnpj.substring(0, tamanho);
+      soma = 0;
+      pos = tamanho - 7;
+
+      for (let i = tamanho; i >= 1; i--) {
+        soma += parseInt(numeros.charAt(tamanho - i)) * pos--;
+        if (pos < 2) pos = 9;
+      }
+
+      resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+      if (resultado !== parseInt(digitos.charAt(1))) {
+        aplicarStatus(input, feedback, false, 'CNPJ inválido');
+        return;
+      }
+
+      aplicarStatus(input, feedback, true);
+    }
+
+    function aplicarStatus(input, feedbackEl, ehValido, msgErro = '') {
+      input.classList.remove('valido', 'invalido');
+      feedbackEl.classList.remove('invalido');
+
+      if (ehValido) {
+        input.classList.add('valido');
+        feedbackEl.innerText = '';
+      } else {
+        input.classList.add('invalido');
+        feedbackEl.classList.add('invalido');
+        feedbackEl.innerText = msgErro;
+      }
+    }
+
+    function removerValidacao(input, feedbackEl) {
+      input.classList.remove('valido', 'invalido');
+      feedbackEl.classList.remove('invalido');
+      feedbackEl.innerText = '';
+    }
+
+    function limparFeedback() {
+      removerValidacao(document.getElementById('inputCpf'), document.getElementById('feedbackCpf'));
+      removerValidacao(document.getElementById('inputCnpj'), document.getElementById('feedbackCnpj'));
+    }
+  </script>
+</body>
+</html>

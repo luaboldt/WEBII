@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Luã Boldt">
+  <title>Exercício 03 - Mostrar/Esconder Senha</title>
+
+  <!-- Auto-ajuste de rota caso falte a barra -->
+  <script>
+    if (window.location.pathname && !window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+      window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Sistema Global de Temas -->
+  <link rel="stylesheet" href="../global.css">
+  <script src="../tema.js"></script>
+
+  <link rel="stylesheet" href="./style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Barra Superior */
+    .top-nav {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-voltar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s ease;
+    }
+
+    .btn-voltar:hover {
+      transform: translateX(-2px);
+      border-color: var(--primary);
+    }
+
+    .badge-tag {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      border: 1px solid var(--badge-border);
+      transition: all 0.3s ease;
+    }
+
+    /* Card Central */
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+
+    .descricao {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Input com Botão Integrado */
+    .input-senha-wrapper {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .input-senha-wrapper input[type="password"],
+    .input-senha-wrapper input[type="text"] {
+      width: 100%;
+      padding: 14px 130px 14px 16px;
+      border: 2px solid var(--input-border);
+      background-color: var(--input-bg);
+      color: var(--text-main);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .input-senha-wrapper input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Botão de Alternar Senha */
+    .btn-toggle-senha {
+      position: absolute;
+      right: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .btn-toggle-senha:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .status-indicador {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior -->
+  <header class="top-nav">
+    <a href="../index.html" class="btn-voltar">
+      ← Voltar aos Exercícios
+    </a>
+    <span class="badge-tag">Exercício 03 • Manipulação do DOM</span>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container">
+    <div class="card">
+      <h1>Mostrar / Esconder Senha</h1>
+      <p class="descricao">Digite uma senha e clique no botão para alternar a visibilidade entre texto oculto e visível:</p>
+
+      <form onsubmit="event.preventDefault();">
+        <div class="form-group">
+          <label for="campoSenha">Senha de Acesso:</label>
+          <div class="input-senha-wrapper">
+            <input type="password" id="campoSenha" placeholder="Digite sua senha..." autocomplete="current-password">
+            <button type="button" id="btnToggleSenha" class="btn-toggle-senha" onclick="alternarSenha()">
+              👁️ Mostrar
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="status-indicador" id="statusTipo">
+        Tipo atual do input: <code>type="password"</code> (Oculto)
+      </div>
+    </div>
+  </main>
+
+  <script src="./script.js"></script>
+
+  <!-- Script Embutido -->
+  <script>
+    /**
+     * Alterna o atributo type do input entre 'password' e 'text'
+     */
+    function alternarSenha() {
+      const campoSenha = document.getElementById('campoSenha');
+      const btnToggle = document.getElementById('btnToggleSenha');
+      const statusTipo = document.getElementById('statusTipo');
+
+      if (campoSenha.type === 'password') {
+        campoSenha.type = 'text';
+        btnToggle.innerHTML = '🙈 Esconder';
+        if (statusTipo) {
+          statusTipo.innerHTML = 'Tipo atual do input: <code>type="text"</code> (Visível)';
+        }
+      } else {
+        campoSenha.type = 'password';
+        btnToggle.innerHTML = '👁️ Mostrar';
+        if (statusTipo) {
+          statusTipo.innerHTML = 'Tipo atual do input: <code>type="password"</code> (Oculto)';
+        }
+      }
+    }
+  </script>
+</body>
+</html>

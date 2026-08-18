@@ -1,0 +1,111 @@
+/* =======================================================
+   SISTEMA GLOBAL DE TEMAS (CLARO / ESCURO) - WEB II
+   ======================================================= */
+
+:root {
+  /* Tema Claro (Padrão) */
+  --bg-app: #f8fafc;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border-color: #e2e8f0;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-light: #eef2ff;
+  
+  --badge-bg: #eef2ff;
+  --badge-text: #4f46e5;
+  --badge-border: #e0e7ff;
+  
+  --tag-bg: #f1f5f9;
+  --tag-text: #475569;
+  --tag-border: #e2e8f0;
+}
+
+/* Tema Escuro */
+[data-tema="escuro"],
+body.tema-escuro {
+  --bg-app: #0b1120;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --surface: #1e293b;
+  --surface-alt: #0f172a;
+  --border-color: #334155;
+  --input-bg: #0f172a;
+  --input-border: #475569;
+  --card-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5);
+  
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-light: rgba(129, 140, 248, 0.15);
+  
+  --badge-bg: #0f172a;
+  --badge-text: #a5b4fc;
+  --badge-border: #334155;
+  
+  --tag-bg: #0f172a;
+  --tag-text: #cbd5e1;
+  --tag-border: #334155;
+}
+
+/* Aplicação Global Básica */
+body {
+  background-color: var(--bg-app) !important;
+  color: var(--text-main) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Elementos de superfície (Cabeçalhos, Rodapés, Cards) */
+.header,
+.footer,
+.card,
+.about-card,
+.card-link {
+  background-color: var(--surface) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-color) !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Inputs globais */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select,
+textarea {
+  background-color: var(--input-bg) !important;
+  color: var(--text-main) !important;
+  border-color: var(--input-border) !important;
+}
+
+/* Botão Flutuante de Alternância Global */
+.btn-toggle-tema-global {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: var(--surface);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-toggle-tema-global:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}

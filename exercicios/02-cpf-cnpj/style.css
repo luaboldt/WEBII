@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Barra Superior */
+.top-nav {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.btn-voltar:hover {
+  transform: translateX(-2px);
+  border-color: var(--primary);
+}
+
+.badge-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--badge-border);
+  transition: all 0.3s ease;
+}
+
+/* Card Central */
+.container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.descricao {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label-titulo {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+/* Opções de Radio */
+.radio-container {
+  display: flex;
+  gap: 16px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.radio-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: var(--text-main);
+  user-select: none;
+}
+
+.radio-label:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.radio-label input[type="radio"] {
+  accent-color: var(--primary);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.campo-documento {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeIn 0.3s ease;
+}
+
+.campo-documento label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.campo-documento input[type="text"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.campo-documento input[type="text"]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+/* ========================================================
+   ESTADOS DE VALIDAÇÃO DE ALTO CONTRASTE E ALTA VISIBILIDADE
+   ======================================================== */
+
+/* 1. VÁLIDO (VERDE VIBRANTE) */
+.campo-documento input.valido {
+  border-color: #10b981 !important;
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25) !important;
+}
+
+body.tema-escuro .campo-documento input.valido {
+  border-color: #34d399 !important;
+  background-color: rgba(16, 185, 129, 0.22) !important;
+  color: #ecfdf5 !important;
+  box-shadow: 0 0 16px rgba(52, 211, 153, 0.35) !important;
+}
+
+/* 2. INVÁLIDO (VERMELHO VIBRANTE) */
+.campo-documento input.invalido {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+  color: #991b1b !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25) !important;
+}
+
+body.tema-escuro .campo-documento input.invalido {
+  border-color: #f87171 !important;
+  background-color: rgba(239, 68, 68, 0.22) !important;
+  color: #fef2f2 !important;
+  box-shadow: 0 0 16px rgba(248, 113, 113, 0.35) !important;
+}
+
+/* Mensagem de Erro (visível apenas quando inválido) */
+.feedback-msg {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ef4444;
+  display: none;
+}
+
+body.tema-escuro .feedback-msg {
+  color: #f87171;
+}
+
+.feedback-msg.invalido {
+  display: block;
+}
+
+.escondido {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

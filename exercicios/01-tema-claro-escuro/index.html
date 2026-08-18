@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Luã Boldt">
+  <title>Exercício 01 - Tema Claro e Escuro</title>
+  
+  <!-- Redirecionamento automático caso falte a barra no final da URL -->
+  <script>
+    if (window.location.pathname && !window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+      window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Sistema Global de Temas (Claro / Escuro) -->
+  <link rel="stylesheet" href="../global.css">
+  <script src="../tema.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+    }
+
+    /* Barra Superior */
+    .top-nav {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-voltar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: inherit;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    .btn-voltar:hover {
+      background: rgba(0, 0, 0, 0.1);
+      transform: translateX(-2px);
+    }
+
+    .badge-tag {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      background: rgba(79, 70, 229, 0.1);
+      color: #4f46e5;
+    }
+
+    /* Card Central */
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .card {
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      opacity: 0.9;
+    }
+
+    .botoes-container {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-claro {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      border-color: #cbd5e1;
+    }
+
+    .btn-claro:hover {
+      background-color: #e2e8f0;
+    }
+
+    .btn-escuro {
+      background-color: #0f172a;
+      color: #f8fafc;
+      border-color: #334155;
+    }
+
+    .btn-escuro:hover {
+      background-color: #1e293b;
+    }
+
+    .status-box {
+      display: inline-block;
+      font-size: 0.85rem;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    body.tema-escuro .status-box {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegação superior -->
+  <header class="top-nav">
+    <a href="../index.html" class="btn-voltar">
+      ← Voltar aos Exercícios
+    </a>
+    <span class="badge-tag">Exercício 01 • Manipulação do DOM</span>
+  </header>
+
+  <!-- Conteúdo Principal do Exercício -->
+  <main class="container">
+    <div class="card">
+      <h1 id="titulo">Alternador de Tema</h1>
+      <p id="texto">
+        Ao clicar nos botões abaixo, uma função em JavaScript troca a cor de fundo e a cor do texto da página.
+      </p>
+
+      <div class="botoes-container">
+        <button type="button" id="btnTemaClaro" class="btn btn-claro" onclick="trocarTema('claro')">
+          ☀️ Tema Claro
+        </button>
+        <button type="button" id="btnTemaEscuro" class="btn btn-escuro" onclick="trocarTema('escuro')">
+          🌙 Tema Escuro
+        </button>
+      </div>
+
+      <div class="status-box" id="statusTema">
+        Tema atual: <strong>Claro ☀️</strong>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+
+  <!-- Script com integração ao tema global -->
+  <script>
+    function trocarTema(tema) {
+      const statusTema = document.getElementById('statusTema');
+
+      if (tema === 'claro') {
+        localStorage.setItem('tema_webii', 'claro');
+        document.documentElement.setAttribute('data-tema', 'claro');
+        document.body.classList.remove('tema-escuro');
+        if (statusTema) statusTema.innerHTML = 'Tema atual: <strong>Claro ☀️</strong>';
+      } else if (tema === 'escuro') {
+        localStorage.setItem('tema_webii', 'escuro');
+        document.documentElement.setAttribute('data-tema', 'escuro');
+        document.body.classList.add('tema-escuro');
+        if (statusTema) statusTema.innerHTML = 'Tema atual: <strong>Escuro 🌙</strong>';
+      }
+
+      // Atualiza o botão flutuante se ele existir
+      const btnGlobal = document.getElementById('btnTemaGlobal');
+      if (btnGlobal) {
+        btnGlobal.innerHTML = tema === 'escuro' ? '☀️ Tema Claro' : '🌙 Tema Escuro';
+      }
+    }
+  </script>
+</body>
+</html>
