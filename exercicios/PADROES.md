@@ -106,6 +106,15 @@ Para inputs que possuem botões integrados no lado direito (como alternador de s
 </div>
 ```
 
+### 4. Menu Lateral Deslizante (*Sidebar Drawer Navigation*)
+Permite que o usuário navegue diretamente entre todos os exercícios do projeto sem precisar voltar à Landing Page:
+- Injetado e controlado via `menu.js`.
+- Fornece botão de abertura flutuante no topo esquerdo, painel deslizante com backdrop blur, lista de exercícios com identificadores, link rápido para a Home, indicador de página atual e suporte a fechar por `ESC` ou clique fora.
+- Importação obrigatória no `<head>`:
+  ```html
+  <script src="../menu.js"></script>
+  ```
+
 ---
 
 ## 🔄 5. Regra de Evolução Contínua dos Padrões (Auto-documentação)
@@ -142,9 +151,10 @@ Copie a estrutura abaixo para criar rapidamente o próximo exercício (`04-...`)
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Sistema Global de Temas -->
+  <!-- Sistema Global de Temas e Menu Lateral -->
   <link rel="stylesheet" href="../global.css">
   <script src="../tema.js"></script>
+  <script src="../menu.js"></script>
 
   <link rel="stylesheet" href="./style.css">
 </head>

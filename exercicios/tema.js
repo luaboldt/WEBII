@@ -13,11 +13,20 @@
   const temaSalvo = localStorage.getItem('tema_webii') || 'claro';
   aplicarTemaNoDOM(temaSalvo);
 
-  // 2. Quando o DOM estiver pronto, adiciona o botão flutuante
+  // 2. Quando o DOM estiver pronto, adiciona o botão flutuante e assegura menu.js
   document.addEventListener('DOMContentLoaded', () => {
     // Aplica novamente no body caso o DOM tenha acabado de carregar
     aplicarTemaNoDOM(localStorage.getItem('tema_webii') || 'claro');
     criarBotaoAlternador();
+
+    // Carrega o menu lateral caso não tenha sido inserido diretamente via tag script
+    if (!window.MenuLateralWEBII && !document.getElementById('sidebarMenu')) {
+      const path = window.location.pathname.replace(/\\/g, '/');
+      const estaEmSubpasta = path.includes('/01-') || path.includes('/02-') || path.includes('/03-') || path.includes('/04-') || path.includes('/05-');
+      const scriptMenu = document.createElement('script');
+      scriptMenu.src = (estaEmSubpasta ? '../' : './') + 'menu.js';
+      document.head.appendChild(scriptMenu);
+    }
   });
 
   /**

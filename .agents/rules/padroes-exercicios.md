@@ -14,17 +14,19 @@ Ao criar ou atualizar qualquer exercício no projeto `exercicios/`:
    - Adicionar uma entrada correspondente no menu da Landing Page (`exercicios/index.html`).
    - Incluir a tag `<meta name="author" content="Luã Boldt">` no `<head>` de todos os arquivos HTML.
 
-2. **Tema Global Obrigatório**:
+2. **Tema Global e Menu Lateral Obrigatórios**:
    - Todo exercício deve importar no `<head>`:
      ```html
      <link rel="stylesheet" href="../global.css">
      <script src="../tema.js"></script>
+     <script src="../menu.js"></script>
      ```
    - Utilizar as variáveis CSS de `global.css` (`--bg-app`, `--surface`, `--surface-alt`, `--text-main`, `--text-muted`, `--border-color`, `--input-bg`, `--input-border`, `--primary`, `--badge-bg`, `--badge-text`, `--badge-border`, `--tag-bg`, `--tag-text`, `--tag-border`).
 
 3. **Layout e Componentes**:
    - Usar tipografia `'Outfit', sans-serif`.
    - Incluir a barra superior `.top-nav` com o botão `.btn-voltar` para `../index.html` e a `.badge-tag`.
+   - O menu lateral de navegação deslizante (*Sidebar Drawer*) é injetado automaticamente via `menu.js` para permitir transição direta entre atividades.
    - Centralizar o conteúdo com `.container` e `.card`.
 
 4. **Validações e Feedbacks**:
