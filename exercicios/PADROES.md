@@ -115,6 +115,32 @@ Permite que o usuário navegue diretamente entre todos os exercícios do projeto
   <script src="../menu.js"></script>
   ```
 
+### 5. Lista de Itens Dinâmicos / Chips com Remoção
+Para acumulação e gerenciamento visual de coleções de dados (como lista de números ou tags):
+```html
+<div class="chips-container">
+  <div class="chip-numero">
+    <span>42</span>
+    <button type="button" class="btn-remover-chip" onclick="removerItem(0)">✕</button>
+  </div>
+</div>
+```
+
+### 6. Painel de Resultados & Grid de Estatísticas
+Para exibição de totais, contadores, médias e métricas calculadas:
+```html
+<div class="painel-resultados">
+  <div class="resultado-destaque">
+    <span class="resultado-rotulo">Soma Total</span>
+    <div class="resultado-valor-soma">120</div>
+  </div>
+  <div class="resultado-grid">
+    <div class="resultado-item"><span class="item-rotulo">Quantidade</span><span class="item-valor">4</span></div>
+    <div class="resultado-item"><span class="item-rotulo">Média</span><span class="item-valor">30</span></div>
+  </div>
+</div>
+```
+
 ---
 
 ## 🔄 5. Regra de Evolução Contínua dos Padrões (Auto-documentação)
@@ -127,7 +153,7 @@ Sempre que um novo exercício demandar elementos ou comportamentos não previsto
 
 ## 📋 6. Template Boilerplate para Novos Exercícios
 
-Copie a estrutura abaixo para criar rapidamente o próximo exercício (`04-...`):
+Copie a estrutura abaixo para criar rapidamente o próximo exercício (`05-...`):
 
 ### `index.html`:
 ```html

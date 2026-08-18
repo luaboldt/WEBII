@@ -34,6 +34,14 @@
       descricao: 'Alternador de visibilidade de campo password',
       tag: 'DOM • Inputs',
       path: '03-mostrar-esconder-senha/index.html'
+    },
+    {
+      id: '04',
+      slug: '04-soma-numeros',
+      titulo: 'Somatório de Números',
+      descricao: 'Laços while e do...while para acumulação e média',
+      tag: 'JavaScript • Laços',
+      path: '04-soma-numeros/index.html'
     }
   ];
 
